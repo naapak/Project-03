@@ -1,0 +1,30 @@
+<script type="text/javascript">
+	$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+</script>
+
+
+<section>
+	<h2 class="textCenter black categories caps"> Inhabitent Journal </h2>
+	<div class="serverData black owl-carousel owl-height owl-theme" *ngFor="let ModelEntry of ModelEntryData">
+		<img src="{{ModelEntry.image}}">
+		<p class=" black">{{ModelEntry.date}}</p>
+		<h2 class=" black"> {{ModelEntry.title}}</h2>
+		<button class="greenButton">View More</button>	
+	</div>
+</section>
+
