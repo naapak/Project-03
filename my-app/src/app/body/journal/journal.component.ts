@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {JournalService} from '../../services/journal.service';
 import {ModelEntry} from "../../services/journal-entry.component";
-
+declare var $:any;
+ 
 
 @Component({
   moduleId: module.id,
@@ -10,6 +11,8 @@ import {ModelEntry} from "../../services/journal-entry.component";
   styleUrls: ['./journal.component.css']
 })
 export class JournalComponent implements OnInit{
+
+
 
 	ModelEntryData: ModelEntry[] = <ModelEntry[]>[];
 
@@ -26,8 +29,7 @@ export class JournalComponent implements OnInit{
 ngOnInit(): void{
 
 	this.journalData();
-	this.owlCarousel();
-}
+	}
 	
 //journalData(){} promise.arrayofarraofjournals. 
 
@@ -36,12 +38,38 @@ journalData(): void {
 	let JournalDataFromserver: Promise<ModelEntry[]> = this.journalService.getJournalData();
 
 	JournalDataFromserver.then(
-		modelEntry => { this.ModelEntryData = <ModelEntry[]>modelEntry; console.log("data:=" + modelEntry); }
-		);
+		modelEntry => { this.ModelEntryData = <ModelEntry[]>modelEntry; console.log("data:=" + modelEntry);  } 
+		).then(run =>{this.owlCarousel();});
+	
+// this.owlCarousel(); 
 
 }
 
-owlCarousel() {
+owlCarousel() { $(document).ready(function(){
+    console.log("iam here in the carousel vjhvjhv");
+            $('.owl-carousel').owlCarousel({
+              loop:true,
+              margin:10,
+              responsiveClass:true,
+              responsive:{
+                  0:{
+                      items:1,
+                      nav:true
+                  },
+                  600:{
+                      items:2,
+                      nav:false
+                  },
+                  1050:{
+                      items:4,
+                      nav:true,
+                      loop:false
+                    }
+                }
+            })
+
+        });
+
 }
 
 //deal with it. 
